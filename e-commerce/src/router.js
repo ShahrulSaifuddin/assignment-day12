@@ -27,7 +27,7 @@ const router = createRouter({
       component: TheContactPage,
     },
   ],
-  // linkActiveClass: 'active',
+  linkActiveClass: 'active',
 });
 
 export default router;
