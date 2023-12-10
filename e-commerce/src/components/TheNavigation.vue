@@ -8,6 +8,9 @@
         <li>
           <router-link to="/products">Products</router-link>
         </li>
+        <li>
+          <router-link to="/contact">Contact Us</router-link>
+        </li>
       </ul>
     </nav>
   </header>
