@@ -3,29 +3,36 @@
     <div class="title">
       <h1>Products</h1>
     </div>
-    <br />
-    <div class="card" v-for="item in paginatedList" :key="item.id">
-      <img :src="item.images" alt="Product" />
-      <div class="container">
-        <h4><b>{{ item.title }}</b></h4>
-        <h4><b>{{ item.price }}</b></h4>
+    <div class="container">
+      <div class="card" v-for="item in paginatedList" :key="item.id">
+        <img :src="item.images" alt="Product" />
+        <h4>
+          <b>{{ item.title }}</b>
+        </h4>
+        <h4>
+          <b>{{ item.price }}</b>
+        </h4>
         <p>{{ item.description }}</p>
       </div>
     </div>
 
     <div class="pagination">
-      <button @click="goToPage(page - 1)" :disabled="page === 1">Previous</button>
+      <button @click="goToPage(page - 1)" :disabled="page === 1">
+        Previous
+      </button>
       <span>{{ page }}</span>
-      <button @click="goToPage(page + 1)" :disabled="page === totalPages">Next</button>
+      <button @click="goToPage(page + 1)" :disabled="page === totalPages">
+        Next
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "ProductApp",
+  name: 'ProductApp',
   data() {
     return {
       list: [],
@@ -44,7 +51,7 @@ export default {
     },
   },
   async mounted() {
-    let result = await axios.get("https://api.escuelajs.co/api/v1/products");
+    let result = await axios.get('https://api.escuelajs.co/api/v1/products');
     this.list = result.data;
   },
   methods: {
@@ -58,21 +65,14 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .title {
   text-align: center;
   margin: 30px 0;
 }
 
 .Product_list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .card {
@@ -81,18 +81,27 @@ export default {
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
-  width: 200px;
+  width: 300px;
   text-align: center;
+  transition: all 0.3s ease-out;
 }
 
-.card img {
+img {
   width: 100%;
   height: auto;
   border-radius: 5px 5px 0 0;
+  transition: all 0.3s ease-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
 
 .container {
-  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 h4,
@@ -103,7 +112,7 @@ p {
 .pagination {
   margin-top: auto;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 1rem 0;
 }
 
 .pagination button {
@@ -119,5 +128,9 @@ p {
 .pagination button:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
+}
+
+span {
+  margin: 0 0.5rem;
 }
 </style>
