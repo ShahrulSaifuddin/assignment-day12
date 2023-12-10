@@ -1,21 +1,23 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-  <TheNavigation />
-  <main>
-    <router-view></router-view>
-  </main>
+  <div class="main-container">
+    <TheNavigation />
+    <main>
+      <router-view></router-view>
+    </main>
+    <TheFooter />
+  </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue';
 import TheNavigation from './components/TheNavigation.vue';
+import TheFooter from './components/TheFooter.vue';
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
     TheNavigation,
+    TheFooter,
   },
 };
 </script>
@@ -32,5 +34,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.main-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 </style>
