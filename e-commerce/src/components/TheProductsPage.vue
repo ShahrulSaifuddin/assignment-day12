@@ -3,16 +3,19 @@
     <div class="title">
       <h1>Products</h1>
     </div>
-    <div class="container">
-      <div class="card" v-for="item in paginatedList" :key="item.id">
-        <img :src="item.images" alt="Product" />
-        <h4>
-          <b>{{ item.title }}</b>
-        </h4>
-        <h4>
-          <b>{{ item.price }}</b>
-        </h4>
-        <p>{{ item.description }}</p>
+    <div>
+      <div v-if="isLoading" class="loading">Loading...</div>
+      <div v-else class="container">
+        <div class="card" v-for="item in paginatedList" :key="item.id">
+          <img :src="item.images" alt="Product" />
+          <h4>
+            <b>{{ item.title }}</b>
+          </h4>
+          <h4>
+            <b>{{ item.price }}</b>
+          </h4>
+          <p>{{ item.description }}</p>
+        </div>
       </div>
     </div>
 
@@ -38,6 +41,7 @@ export default {
       list: [],
       pageSize: 5,
       page: 1,
+      isLoading: false,
     };
   },
   computed: {
@@ -51,8 +55,10 @@ export default {
     },
   },
   async mounted() {
+    this.isLoading = true;
     let result = await axios.get('https://api.escuelajs.co/api/v1/products');
     this.list = result.data;
+    this.isLoading = false;
   },
   methods: {
     goToPage(newPage) {
@@ -65,14 +71,15 @@ export default {
 </script>
 
 <style scoped>
+.Product_list {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
 .title {
   text-align: center;
   margin: 30px 0;
-}
-
-.Product_list {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  height: 50px;
 }
 
 .card {
@@ -113,6 +120,7 @@ p {
   margin-top: auto;
   text-align: center;
   margin: 1rem 0;
+  height: 50px;
 }
 
 .pagination button {
